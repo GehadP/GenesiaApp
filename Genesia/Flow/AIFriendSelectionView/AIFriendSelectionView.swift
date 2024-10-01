@@ -19,7 +19,9 @@ struct AIFriendSelectionView: View {
         AIFriend(image: "onboading1", backgroundImage: "onboading1"),
         AIFriend(image: "onboading2", backgroundImage: "onboading2"),
         AIFriend(image: "onboading3", backgroundImage: "onboading3"),
-        AIFriend(image: "onboading1", backgroundImage: "onboading1")
+        AIFriend(image: "onboading1", backgroundImage: "onboading1"),
+        AIFriend(image: "onboading2", backgroundImage: "onboading2"),
+        AIFriend(image: "onboading3", backgroundImage: "onboading3")
     ]
     
     init(path: Binding<NavigationPath>) {
@@ -38,6 +40,7 @@ struct AIFriendSelectionView: View {
             VStack {
                 HStack {
                     Button(action: {
+                        // Handle back action
                     }) {
                         Image(systemName: "chevron.left")
                             .foregroundColor(.white)
@@ -51,24 +54,29 @@ struct AIFriendSelectionView: View {
                     .fontWeight(.bold)
                     .foregroundColor(.white)
                     .padding(.top, 20)
+                
                 Spacer()
             
-                HStack(spacing: 20) {
-                    ForEach(friends) { friend in
-                        Button(action: {
-                            selectedFriend = friend
-                        }) {
-                            Image(friend.image)
-                                .resizable()
-                                .scaledToFill()
-                                .frame(width: 60, height: 60)
-                                .clipShape(Circle())
-                                .overlay(
-                                    Circle()
-                                        .stroke(Color.white, lineWidth: selectedFriend.id == friend.id ? 3 : 0)
-                                )
+                // Scrollable horizontal list of friends
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(spacing: 20) {
+                        ForEach(friends) { friend in
+                            Button(action: {
+                                selectedFriend = friend
+                            }) {
+                                Image(friend.image)
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(width: 60, height: 60)
+                                    .clipShape(Circle())
+                                    .overlay(
+                                        Circle()
+                                            .stroke(Color.white, lineWidth: selectedFriend.id == friend.id ? 3 : 0)
+                                    )
+                            }
                         }
                     }
+                    .padding(.horizontal, 20)
                 }
                 .padding(.bottom, 20)
                 
@@ -96,6 +104,7 @@ struct AIFriendSelectionView: View {
         }
     }
 }
+
 
 struct AIFriendSelectionView_Previews: PreviewProvider {
     static var previews: some View {
