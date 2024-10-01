@@ -9,11 +9,10 @@ import SwiftUI
 
 struct LandingScreen: View {
     @EnvironmentObject var vm: LandingFlowViewModel
-    let imageNames = ["onboading1",
-                      "onboading2",
-                      "onboading3"
+    let imageNames = ["person1",
+                      "person2",
+                      "person3"
                     ]
-    
     @State private var currentIndex = 0
     @State private var showPrivacyPolicy = false
     @State private var showTermsOfService = false
@@ -35,28 +34,18 @@ struct LandingScreen: View {
             .navigationDestination(for: UserNamePushedFrom.self, destination: { pushedFrom in
               userNameView(pushedFrom: pushedFrom)
             })
+//                  .navigationDestination(for: UserNamePushedFrom.self, destination: { pushedFrom in
+//                    userNameView(pushedFrom: pushedFrom)
+//                  })
+//                  .navigationDestination(for: AIModel.self, destination: { model in
+//                    let vm = ChatViewViewModel(aiModel: model)
+//                    ChatViewScreen(vm: vm,
+//                                   path: $path, showSetRelationShipView: false)
+//                  })
             .navigationBarBackButtonHidden()
             .background {
               backgroundView
             }
-            //      .navigationDestination(for: UserNamePushedFrom.self, destination: { pushedFrom in
-            //        userNameView(pushedFrom: pushedFrom)
-            //      })
-            //      .navigationDestination(for: AIModel.self, destination: { model in
-            //        let vm = ChatViewViewModel(aiModel: model)
-            //        ChatViewScreen(vm: vm,
-            //                       path: $path, showSetRelationShipView: false)
-            //      })
-            //      .navigationBarBackButtonHidden()
-            //      .background {
-            //        backgroundView
-            //      }
-            //      .sheet(isPresented: $showTermsOfService, content: {
-            //        TermsOfService()
-            //      })
-            //      .sheet(isPresented: $showPrivacyPolicy, content: {
-            //        PrivacyPolicy()
-            //      })
         }
     }
     
@@ -116,57 +105,8 @@ struct LandingScreen: View {
             ChatListScreen(path:$path)
                 .environmentObject(vm)
         }
-        
-        
-        
-        
-        
-        
-        
-        
-        
     }
-    
-//    @ViewBuilder
-//    private func destinationView(screen:String) -> some View {
-//      if screen == "YourPronounsView" {
-//        YourPronounsView(path: $path)
-//          .environmentObject(vm)
-//      }else if screen == "DateOfBirthView" {
-//        DateOfBirthView(path: $path)
-//          .environmentObject(vm)
-//      }else if screen == "Interests" {
-//        InterestsView(path:$path)
-//          .environmentObject(vm)
-//      }else if screen == "ChooseYourAIFriendScreen" {
-//        ChooseYourAIFriendView(path:$path)
-//          .environmentObject(vm)
-//      }else if screen == "ChooseAINameAndGenderView" {
-//        ChooseAINameAndGenderView(path: $path)
-//          .environmentObject(vm)
-//      }else if screen == "AIAge" {
-//        AIAgeView(path:$path)
-//          .environmentObject(vm)
-//      }else if screen == "ChoosePersonalityView" {
-//        ChoosePersonalityView(path: $path)
-//          .environmentObject(vm)
-//      }else if screen == "AppSubscriptionView" {
-//        AppSubscriptionView(isPresented: .constant(false),
-//                            path: $path)
-//        .environmentObject(vm)
-//      } else if screen == "ChatList" {
-//        ChatListView(vm: ChatListViewModel(),
-//                     path: $path)
-//        .environmentObject(vm)
-//      }else if screen == "ChatViewScreen" {
-//        ChatViewScreen(vm: .init(aiModel: vm.userAnswers.getAIModel()),
-//                       path: $path,
-//                       showSetRelationShipView:true)
-//      }else if screen == "SettingsView" {
-//        SettingsView(path:$path)
-//          .environmentObject(vm)
-//      }
-//    }
+
     private func userNameView(pushedFrom:UserNamePushedFrom) -> some View {
       switch pushedFrom {
         case .landing:
@@ -193,18 +133,16 @@ struct LandingScreen: View {
                 .padding()
                 .foregroundStyle(.white)
         }
-        
         private var letsStartButton:some View {
             CustomContinueButton(title: "Let's Start",
                                  titleColor: .darkBlue,
                                  isDisabled: .constant(false))
-            .scaleEffect(scale)
-            .onAppear {
-               // startScalingAnimation()
-            }
-            .onTapGesture {
-                path.append("EnterNameScreen")
-            }
+          .scaleEffect(scale)
+          .onAppear {
+          }
+          .onTapGesture {
+              path.append(UserNamePushedFrom.landing)
+          }
         }
         private var infoView: some View {
             Text("The AI friend who is always there for you")

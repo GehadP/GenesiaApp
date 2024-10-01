@@ -20,8 +20,7 @@ struct CustomContinueButton: View {
         .padding()
         .frame(width: 300, height: 50, alignment: .center)
         .background(isDisabled ? .gray.opacity(0.5) : .white)
-        .cornerRadius(20)
-        .shadow(color: isDisabled ? .clear :  Color.white.opacity(0.5), radius: 10, x: 0, y: 5)
+        .cornerRadius(32)
     }
 }
 

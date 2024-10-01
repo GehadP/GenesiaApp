@@ -14,7 +14,6 @@ struct ContentView: View {
             if isSplashVisible {
                 SplashScreen()
                     .onAppear{
-                        // Wait for 3 seconds before transitioning
                         DispatchQueue.main.asyncAfter(deadline: .now() + 1){
                             withAnimation {
                                 isSplashVisible = false
@@ -23,9 +22,8 @@ struct ContentView: View {
                     }
             }
             else {
-                //EnterNameScreen()
                 LandingScreen(path:$navigationPath)
-                  .environmentObject(vm)
+                    .environmentObject(vm)
             }
         }
     }

@@ -10,6 +10,8 @@
 import SwiftUI
 
 struct PronounSelectionScreen: View {
+    
+    @EnvironmentObject private var vm:LandingFlowViewModel
     @State private var selectedPronoun = "He / Him" // Default selection
     @State var navigateToNextScreen: Bool = false
     let pronouns = ["She / Her", "He / Him", "They / Them"]
@@ -93,6 +95,9 @@ extension PronounSelectionScreen {
         .frame(height: 150)
         .clipped()
         .padding()
+        .onChange(of: selectedPronoun) { oldValue, newValue in
+            vm.userChoices.userPronouns = newValue
+        }
     }
     
 }
