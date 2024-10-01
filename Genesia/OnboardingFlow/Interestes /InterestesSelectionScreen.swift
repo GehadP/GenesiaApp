@@ -14,7 +14,6 @@ struct InterestItem: Hashable {
 }
 
 struct InterestsSelectionView: View {
-    // Use the InterestItem struct instead of a tuple
     let interests = [
         InterestItem(icon: "🎨", text: "Art and Creativity"),
         InterestItem(icon: "📚", text: "Literature"),
@@ -39,6 +38,7 @@ struct InterestsSelectionView: View {
     ]
     
     // State for tracking selected items
+    @EnvironmentObject var vm:LandingFlowViewModel
     @State private var selectedInterests: [InterestItem] = []
     @Binding var path:NavigationPath
     var body: some View {
@@ -87,7 +87,9 @@ struct InterestsSelectionView: View {
               ToolbarItem(placement: .topBarLeading) {
                 CustomBackButton()
               }
-            }
+            }.onChange(of: selectedInterests) { oldValue, newValue in
+               // vm.userChoices.interests = newValue
+              }
     }
     
     // Selection logic with maximum of 5 interests
