@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct BirthdaySelectionScreen: View {
+    @EnvironmentObject var vm:LandingFlowViewModel
     @State private var selectedDate: Date = Date()
     @State var navigateToNextScreen: Bool = false
     @Binding var path:NavigationPath
@@ -81,5 +82,8 @@ extension BirthdaySelectionScreen {
             .clipped()
             .padding()
             .colorInvert()
+            .onChange(of: selectedDate) { oldValue, newValue in
+                vm.userChoices.dateOfBirth = newValue
+            }
     }
 }
