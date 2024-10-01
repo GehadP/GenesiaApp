@@ -12,10 +12,9 @@ struct AIFriend: Identifiable {
     let image: String
     let backgroundImage: String
 }
-
 struct AIFriendSelectionView: View {
     @State private var selectedFriend: AIFriend
-    @Binding var path:NavigationPath
+    @Binding var path: NavigationPath
     let friends: [AIFriend] = [
         AIFriend(image: "onboading1", backgroundImage: "onboading1"),
         AIFriend(image: "onboading2", backgroundImage: "onboading2"),
@@ -27,6 +26,7 @@ struct AIFriendSelectionView: View {
         _selectedFriend = State(initialValue: friends[0])
         _path = path
     }
+    
     var body: some View {
         ZStack {
             // Background Image
@@ -80,14 +80,11 @@ struct AIFriendSelectionView: View {
                     Text("Continue")
                         .font(.headline)
                         .foregroundColor(.darkBlue)
+                        .frame(width: 350) // Fixed width
                         .padding()
-                        .frame(maxWidth: .infinity)
-                        .cornerRadius(32)
-                        .padding(.horizontal, 40)
                         .background(Color.white)
-                       
+                        .cornerRadius(32)
                 }
-                .padding(.horizontal)
                 .padding(.bottom, 30)
             }
         }
