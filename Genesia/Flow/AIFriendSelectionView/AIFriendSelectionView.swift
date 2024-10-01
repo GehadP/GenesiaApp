@@ -19,9 +19,9 @@ struct AIFriendSelectionView: View {
         AIFriend(image: "onboading1", backgroundImage: "onboading1"),
         AIFriend(image: "onboading2", backgroundImage: "onboading2"),
         AIFriend(image: "onboading3", backgroundImage: "onboading3"),
-        AIFriend(image: "onboading1", backgroundImage: "onboading1"),
-        AIFriend(image: "onboading2", backgroundImage: "onboading2"),
+        AIFriend(image: "onboading3", backgroundImage: "onboading3"),
         AIFriend(image: "onboading3", backgroundImage: "onboading3")
+        
     ]
     
     init(path: Binding<NavigationPath>) {
@@ -59,7 +59,7 @@ struct AIFriendSelectionView: View {
             
                 // Scrollable horizontal list of friends
                 ScrollView(.horizontal, showsIndicators: false) {
-                    HStack(spacing: 20) {
+                    HStack(spacing: 30) {
                         ForEach(friends) { friend in
                             Button(action: {
                                 selectedFriend = friend
@@ -77,8 +77,9 @@ struct AIFriendSelectionView: View {
                         }
                     }
                     .padding(.horizontal, 20)
+                    .padding(.leading, UIScreen.main.bounds.width / 2 - 50) // Add extra padding at the start
                 }
-                .padding(.bottom, 20)
+                .content.offset(x: -20)
                 
                 // Continue Button
                 Button(action: {
@@ -88,7 +89,7 @@ struct AIFriendSelectionView: View {
                     Text("Continue")
                         .font(.headline)
                         .foregroundColor(.darkBlue)
-                        .frame(width: 350) // Fixed width
+                        .frame(width: 300) // Fixed width
                         .padding()
                         .background(Color.white)
                         .cornerRadius(32)
