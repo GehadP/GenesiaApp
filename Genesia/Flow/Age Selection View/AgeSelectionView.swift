@@ -11,6 +11,7 @@ struct AgeSelectionView: View {
     @State private var selectedAge: Int = 18
     let availableAges = Array(18...40).reversed()
     @Binding var path:NavigationPath
+    @EnvironmentObject var vm:LandingFlowViewModel
     var body: some View {
        
             ZStack{
@@ -35,7 +36,9 @@ struct AgeSelectionView: View {
                         ForEach(availableAges, id: \.self) { age in
                             Text("\(age)").tag(age)
                         }
-                    }
+                    } .onChange(of: selectedAge) { oldValue, newValue in
+                        vm.userChoices.aiAge = newValue
+                      }
                     .pickerStyle(WheelPickerStyle())
                     .frame(height: 150)
                     .datePickerStyle(WheelDatePickerStyle())

@@ -89,7 +89,7 @@ extension CharacterCreationView {
     }
   }
   private var backgroundView: some View {
-      Image( "onboading1")
+      Image( vm.userChoices.selectedAvatar ?? "")
       .resizable()
       .ignoresSafeArea()
   }
