@@ -14,6 +14,7 @@ struct AIFriend: Identifiable {
 }
 struct AIFriendSelectionView: View {
     @State private var selectedFriend: AIFriend
+    @EnvironmentObject var vm:LandingFlowViewModel
     @Binding var path: NavigationPath
     let friends: [AIFriend] = [
         AIFriend(image: "onboading1", backgroundImage: "onboading1"),

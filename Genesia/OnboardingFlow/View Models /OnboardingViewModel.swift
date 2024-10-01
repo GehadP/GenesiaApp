@@ -162,7 +162,7 @@ final class InMemoryPersistance {
 final class LandingFlowViewModel:ObservableObject {
   var userChoices = UserDataCollection()
   var interests = InterestsModel.getTags()
-  let avatars = ["onboading1", "onboading2", "onboading3"]
+  let avatars = ["person1", "person2", "person3","inboading1"]
   var aiPersonalities = AIPersonalityModel.getPersonalities()
   
   func setUserInterests(interests:[String]) {
