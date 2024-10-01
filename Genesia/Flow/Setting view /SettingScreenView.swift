@@ -10,6 +10,7 @@ import SwiftUI
 struct SettingsView: View {
     @State private var isBackgroundVideoOn = true
     @Environment(\.presentationMode) var presentationMode
+    @Binding var path:NavigationPath
     var body: some View {
         ZStack {
             Color(UIColor(red: 0.05, green: 0.05, blue: 0.1, alpha: 1.0))
@@ -138,6 +139,6 @@ struct TextRow: View {
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsView()
+        SettingsView(path: .constant(NavigationPath()))
     }
 }

@@ -37,9 +37,12 @@ struct ChatListScreen: View {
                     .padding(.vertical, 4)
                     .background(Color.gray.opacity(0.3))
                     .cornerRadius(15)
-                    
-                    Image(systemName: "gear")
-                        .foregroundColor(.white)
+                    Button(action: {
+                        path.append("SettingsView")
+                    }) {
+                        Image(systemName: "gear")
+                            .foregroundColor(.white)
+                    }
                 }
                 .padding()
                 

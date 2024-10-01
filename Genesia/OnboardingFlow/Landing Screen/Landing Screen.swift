@@ -105,6 +105,11 @@ struct LandingScreen: View {
             ChatListScreen(path:$path)
                 .environmentObject(vm)
         }
+        else if screen == "SettingsView" {
+            SettingsView(path:$path)
+                .environmentObject(vm)
+        }
+        
     }
 
     private func userNameView(pushedFrom:UserNamePushedFrom) -> some View {

@@ -38,7 +38,8 @@ struct ProView: View {
                         // Dismiss the current screen and navigate to another view
                         dismiss()
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                            path.append("RelationshipSettingView")
+                            path.append("ChatListScreen")
+                            path.append("ChatScreenView")
                         }
                     }) {
                         Image(systemName: "xmark")
