@@ -82,14 +82,23 @@ struct ProView: View {
                         period: "week",
                         price: "149.99",
                         currency: "EGP",
-                        savePercentage: nil
+                        savePercentage: nil,
+                        topText: "3 days FREE TRIAL, Auto Renewal"
+                    ).overlay(
+                        RoundedRectangle(cornerRadius: 16)
+                            .stroke(.white.opacity(0.5), lineWidth:0.5)
                     )
                     
                     SubscriptionOptionButton(
                         period: "year",
                         price: "1199.99",
                         currency: "EGP",
-                        savePercentage: "90%"
+                        savePercentage: "90%",
+                        topText: "Auto Renewal"
+                    )
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 16)
+                            .stroke(.white.opacity(0.5), lineWidth:0.5)
                     )
                 }
                 .padding()
@@ -149,11 +158,12 @@ struct SubscriptionOptionButton: View {
     let price: String
     let currency: String
     let savePercentage: String?
+    let topText:String
     
     var body: some View {
         HStack {
             VStack(alignment: .leading, spacing: 4) {
-                Text("Auto Renewal")
+                Text("\(topText)")
                     .font(.caption)
                     .foregroundColor(Color.gray)
                 
