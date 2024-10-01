@@ -12,12 +12,12 @@ struct ProView: View {
     @Binding var path: NavigationPath
     // Access the dismiss action from the environment
     @Environment(\.dismiss) var dismiss
-    
+    @EnvironmentObject var vm:LandingFlowViewModel
     var body: some View {
         
         ZStack {
             // Background image with blur effect
-            Image("onboading3") // Replace with your actual image name
+            Image(vm.userChoices.selectedAvatar  ?? "") // Replace with your actual image name
                 .resizable()
                 .aspectRatio(contentMode: .fill)
                 .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)

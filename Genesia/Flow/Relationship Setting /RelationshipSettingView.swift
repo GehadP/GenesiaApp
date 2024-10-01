@@ -11,6 +11,7 @@ struct RelationshipSettingView: View {
     @Environment(\.dismiss) private var dismiss
     @State private var selectedRelationship: Relationship = .friends
     @Binding var path: NavigationPath
+    @EnvironmentObject var vm:LandingFlowViewModel
     enum Relationship {
         case friends, romanticPartners
     }
@@ -34,7 +35,7 @@ struct RelationshipSettingView: View {
                         }
                         .padding(.leading)
                         
-                        Image("onboading1") // Replace with your actual image
+                        Image(vm.userChoices.selectedAvatar ?? "") // Replace with your actual image
                             .resizable()
                             .aspectRatio(contentMode: .fill)
                             .frame(width: 100, height: 100)

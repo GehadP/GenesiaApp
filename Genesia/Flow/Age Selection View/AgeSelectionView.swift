@@ -20,7 +20,7 @@ struct AgeSelectionView: View {
                 
                 VStack(spacing: 20) {
                     
-                    Text("Kk's Age")
+                    Text("\(vm.userChoices.aiName)'s Age")
                         .font(.title)
                         .foregroundColor(.white)
                         .padding(.bottom, 10)
