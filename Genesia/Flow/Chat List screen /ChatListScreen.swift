@@ -12,6 +12,7 @@ struct ChatListScreen: View {
         ChatPreviewItem(name: "Hdhh", message: "Hey there! It is Hdhh. 🌸 I'm s...", time: "Now", image: "onboading1"),
         ChatPreviewItem(name: "Hdhdh", message: "Heyyy! It's Hdhdh. 😊 What's up?...", time: "1d", image: "onboading2")
     ]
+    @EnvironmentObject var vm:LandingFlowViewModel
     @Binding var path:NavigationPath
     var body: some View {
         ZStack {
@@ -57,6 +58,8 @@ struct ChatListScreen: View {
                 
                 Button(action: {
                     // Action for starting new chat
+                    
+                    path.append(UserNamePushedFrom.startNewChat)
                 }) {
                     Text("Start New Chat")
                         .font(.headline)
@@ -72,7 +75,6 @@ struct ChatListScreen: View {
         .navigationBarBackButtonHidden()
         .toolbar {
           ToolbarItem(placement: .topBarLeading) {
-            CustomBackButton()
           }
         }
     }
