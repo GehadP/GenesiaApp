@@ -112,6 +112,12 @@ struct LandingScreen: View {
             ChatScreenView(path:$path)
                 .environmentObject(vm)
         }
+        else if screen == "ChatListScreen" {
+            ChatListScreen(path:$path)
+                .environmentObject(vm)
+        }
+        
+        
         
         
         

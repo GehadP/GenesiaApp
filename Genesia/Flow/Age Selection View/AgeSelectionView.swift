@@ -9,7 +9,7 @@ import SwiftUI
 
 struct AgeSelectionView: View {
     @State private var selectedAge: Int = 18
-    let availableAges = Array(18...21).reversed()
+    let availableAges = Array(18...40).reversed()
     @Binding var path:NavigationPath
     var body: some View {
        

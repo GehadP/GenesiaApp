@@ -12,7 +12,7 @@ struct ProView: View {
     @Binding var path: NavigationPath
     // Access the dismiss action from the environment
     @Environment(\.dismiss) var dismiss
-
+    
     var body: some View {
         
         ZStack {
@@ -30,7 +30,7 @@ struct ProView: View {
             LinearGradient(gradient: Gradient(colors: [Color.blue.opacity(0.3), Color.black.opacity(1)]),
                            startPoint: .topLeading,
                            endPoint: .bottomTrailing)
-                .edgesIgnoringSafeArea(.all)
+            .edgesIgnoringSafeArea(.all)
             
             VStack(spacing: 20) {
                 HStack {

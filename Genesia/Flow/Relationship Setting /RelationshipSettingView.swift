@@ -25,7 +25,7 @@ struct RelationshipSettingView: View {
                         HStack {
                             Button(action: { dismiss() }) {
                                 Image(systemName: "xmark")
-                                    .foregroundColor(.white)
+                                    .foregroundColor(.gray)
                                     .padding(10)
                                     .background(Color(UIColor.systemGray4))
                                     .clipShape(Circle())
@@ -46,12 +46,9 @@ struct RelationshipSettingView: View {
                         .font(.title2)
                         .fontWeight(.bold)
                         .multilineTextAlignment(.center)
-                    
+                        .foregroundColor(.white)
                     VStack(spacing: 10) {
-                        Button(action: {
-                            selectedRelationship = .friends
-                            path.append("ChatScreenView")
-                        }) {
+                        Button(action: { selectedRelationship = .friends }) {
                             Text("Friends")
                                 .frame(maxWidth: .infinity)
                                 .padding()
@@ -86,7 +83,7 @@ struct RelationshipSettingView: View {
             }
             .edgesIgnoringSafeArea(.bottom)
         }
-        .background(Color.clear).edgesIgnoringSafeArea(.all)
+        .background(Color.black.opacity(0.5).edgesIgnoringSafeArea(.all))
         .preferredColorScheme(.dark)
     }
 }
