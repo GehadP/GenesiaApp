@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct AIFriend: Identifiable {
+struct AIFriend: Identifiable,Equatable {
     let id = UUID()
     let image: String
     let backgroundImage: String
@@ -17,12 +17,10 @@ struct AIFriendSelectionView: View {
     @EnvironmentObject var vm:LandingFlowViewModel
     @Binding var path: NavigationPath
     let friends: [AIFriend] = [
-        AIFriend(image: "onboading1", backgroundImage: "onboading1"),
-        AIFriend(image: "onboading2", backgroundImage: "onboading2"),
-        AIFriend(image: "onboading3", backgroundImage: "onboading3"),
-        AIFriend(image: "onboading3", backgroundImage: "onboading3"),
-        AIFriend(image: "onboading3", backgroundImage: "onboading3")
-        
+        AIFriend(image: "person1", backgroundImage: "person1"),
+        AIFriend(image: "person2", backgroundImage: "person2"),
+        AIFriend(image: "person3", backgroundImage: "person3"),
+        AIFriend(image: "onboading1", backgroundImage: "onboading1")
     ]
     
     init(path: Binding<NavigationPath>) {
@@ -97,7 +95,9 @@ struct AIFriendSelectionView: View {
                 }
                 .padding(.bottom, 30)
             }
-        }
+        }.onChange(of: selectedFriend) { oldValue, newValue in
+            vm.userChoices.selectedAvatar = newValue.image
+          }
         .navigationBarBackButtonHidden()
         .toolbar {
           ToolbarItem(placement: .topBarLeading) {
