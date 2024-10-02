@@ -12,7 +12,8 @@ struct ChatListScreen: View {
         ChatPreviewItem(name: "Hdhh", message: "Hey there! It is Hdhh. 🌸 I'm s...", time: "Now", image: "onboading1"),
         ChatPreviewItem(name: "Hdhdh", message: "Heyyy! It's Hdhdh. 😊 What's up?...", time: "1d", image: "onboading2")
     ]
-    @EnvironmentObject var vm:LandingFlowViewModel
+    @EnvironmentObject var landingFlowVM:LandingFlowViewModel
+    @StateObject var vm:ChatListViewModel
     @Binding var path:NavigationPath
     var body: some View {
         ZStack {
@@ -121,6 +122,25 @@ struct ChatPreviewRow: View {
 
 struct ChatListScreen_Previews: PreviewProvider {
     static var previews: some View {
-        ChatListScreen(path: .constant(NavigationPath()))
+       
+        return ChatListScreen(vm: .init(),path: .constant(NavigationPath()))
+          .environmentObject(LandingFlowViewModel())
     }
+}
+final class ChatListViewModel:ObservableObject {
+  @Published var aiModels:[AIModel] = []
+  
+  init() {
+    aiModels = InMemoryPersistance.getAIModels()
+  }
+  
+  func deleteAIModel(modelID:UUID) {
+    InMemoryPersistance.deleteAIModel(modelID: modelID)
+    aiModels = InMemoryPersistance.getAIModels()
+  }
+  
+  func pinModel(modelID:UUID,pinned:Bool) {
+    InMemoryPersistance.pinModel(modelID: modelID, pinned: pinned)
+    aiModels = InMemoryPersistance.getAIModels()
+  }
 }

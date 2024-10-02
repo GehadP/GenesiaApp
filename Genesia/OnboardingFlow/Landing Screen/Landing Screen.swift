@@ -34,9 +34,6 @@ struct LandingScreen: View {
             .navigationDestination(for: UserNamePushedFrom.self, destination: { pushedFrom in
               userNameView(pushedFrom: pushedFrom)
             })
-//                  .navigationDestination(for: UserNamePushedFrom.self, destination: { pushedFrom in
-//                    userNameView(pushedFrom: pushedFrom)
-//                  })
 //                  .navigationDestination(for: AIModel.self, destination: { model in
 //                    let vm = ChatViewViewModel(aiModel: model)
 //                    ChatViewScreen(vm: vm,
@@ -102,8 +99,9 @@ struct LandingScreen: View {
                 .environmentObject(vm)
         }
         else if screen == "ChatListScreen" {
-            ChatListScreen(path:$path)
-                .environmentObject(vm)
+            ChatListScreen(vm: ChatListViewModel(),
+                         path: $path)
+            .environmentObject(vm)
         }
         else if screen == "SettingsView" {
             SettingsView(path:$path)
