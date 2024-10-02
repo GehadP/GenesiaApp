@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct LandingScreen: View {
+struct RoutingScreen: View {
     @EnvironmentObject var vm: LandingFlowViewModel
     let imageNames = ["person1",
                       "person2",
@@ -124,11 +124,11 @@ struct LandingScreen: View {
     }
 }
     #Preview {
-        LandingScreen(path:.constant(NavigationPath()))
+        RoutingScreen(path:.constant(NavigationPath()))
             .environmentObject(LandingFlowViewModel())
     }
     
-    extension LandingScreen {
+    extension RoutingScreen {
         private var titleHeader:some View {
             Text("Genesia AI")
                 .font(.system(size: 40))

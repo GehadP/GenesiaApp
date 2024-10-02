@@ -22,7 +22,7 @@ struct ContentView: View {
                     }
             }
             else {
-                LandingScreen(path:$navigationPath)
+                RoutingScreen(path:$navigationPath)
                     .environmentObject(vm)
             }
         }

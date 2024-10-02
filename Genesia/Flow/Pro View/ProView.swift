@@ -36,6 +36,7 @@ struct ProView: View {
                 HStack {
                     Button(action: {
                         // Dismiss the current screen and navigate to another view
+                        vm.saveAIModel()
                         dismiss()
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                             path.append("ChatListScreen")

@@ -50,7 +50,7 @@ struct ChatListScreen: View {
                 .padding()
                 
                 List {
-                    ForEach(chatPreviews) { preview in
+                    ForEach(InMemoryPersistance.getAIModels()) { preview in
                         ChatPreviewRow(item: preview)
                     }
                     .listRowBackground(Color.clear)
@@ -91,21 +91,21 @@ struct ChatPreviewItem: Identifiable {
 }
 
 struct ChatPreviewRow: View {
-    let item: ChatPreviewItem
+    let item: AIModel
     
     var body: some View {
         HStack(spacing: 12) {
-            Image(item.image)
+            Image(item.selectedAvatar ?? "")
                 .resizable()
                 .scaledToFill()
                 .frame(width: 50, height: 50)
                 .clipShape(Circle())
             
             VStack(alignment: .leading, spacing: 4) {
-                Text(item.name)
+                Text(item.aiName)
                     .font(.headline)
                     .foregroundColor(.white)
-                Text(item.message)
+                Text("Hey there! It is Hdhh. 🌸 I'm s...")
                     .font(.subheadline)
                     .foregroundColor(.gray)
                     .lineLimit(1)
@@ -113,7 +113,7 @@ struct ChatPreviewRow: View {
             
             Spacer()
             
-            Text(item.time)
+            Text("Now")
                 .font(.caption)
                 .foregroundColor(.gray)
         }
