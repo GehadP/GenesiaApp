@@ -8,11 +8,7 @@
 import SwiftUI
 
 struct ChatListScreen: View {
-    @State private var chatPreviews: [ChatPreviewItem] = [
-        ChatPreviewItem(name: "Hdhh", message: "Hey there! It is Hdhh. 🌸 I'm s...", time: "Now", image: "person1"),
-        ChatPreviewItem(name: "Hdhdh", message: "Heyyy! It's Hdhdh. 😊 What's up?...", time: "1d", image: "person2"),
-        ChatPreviewItem(name: "Hdhh", message: "Hey there! It is Hdhh. 🌸 I'm s...", time: "Now", image: "person3")
-    ]
+
     @EnvironmentObject var landingFlowVM:LandingFlowViewModel
     @StateObject var vm:ChatListViewModel
     @Binding var path:NavigationPath

@@ -13,47 +13,47 @@ struct BirthdaySelectionScreen: View {
     @State var navigateToNextScreen: Bool = false
     @Binding var path:NavigationPath
     var dateClosedRange: ClosedRange<Date> {
-      let min = Calendar.current.date(byAdding: .year, value: -100, to: Date())!
-      let max = Date()
-      return min...max
+        let min = Calendar.current.date(byAdding: .year, value: -100, to: Date())!
+        let max = Date()
+        return min...max
     }
     var body: some View {
-       
-            ZStack {
-                Color.darkBlue
-                  .edgesIgnoringSafeArea(.all)
+        
+        ZStack {
+            Color.darkBlue
+                .edgesIgnoringSafeArea(.all)
+            VStack {
                 VStack {
-                    VStack {
-                        yourDateOfBirthTitle
-                        titleDescription
-                    }
-                    .padding(.horizontal,80)
-                    Spacer()
-                    datePicker
-                    Spacer()
-                    Button(action: {
-                        navigateToNextScreen = true
-                        path.append("InterestsSelectionView")
-                    }) {
-                        Text("Continue")
-                            .font(.headline)
-                            .foregroundColor(.black)
-                            .padding()
-                            .frame(maxWidth: .infinity)
-                            .background(Color.white)
-                            .cornerRadius(32)
-                            .padding(.horizontal, 40)
-                    }
-                    .padding(.vertical, 50)
-                    
+                    yourDateOfBirthTitle
+                    titleDescription
                 }
-            } .navigationBarBackButtonHidden()
-            .toolbar {
-              ToolbarItem(placement: .topBarLeading) {
-                CustomBackButton()
-              }
+                .padding(.horizontal,80)
+                Spacer()
+                datePicker
+                Spacer()
+                Button(action: {
+                    navigateToNextScreen = true
+                    path.append("InterestsSelectionView")
+                }) {
+                    Text("Continue")
+                        .font(.headline)
+                        .foregroundColor(.black)
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                        .background(Color.white)
+                        .cornerRadius(32)
+                        .padding(.horizontal, 40)
+                }
+                .padding(.vertical, 50)
+                
             }
-        }
+        } .navigationBarBackButtonHidden()
+            .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    CustomBackButton()
+                }
+            }
+    }
 }
 
 #Preview {

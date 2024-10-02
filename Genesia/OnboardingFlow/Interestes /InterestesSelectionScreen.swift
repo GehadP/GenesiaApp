@@ -37,19 +37,17 @@ struct InterestsSelectionView: View {
         InterestItem(icon: "🌍", text: "Environmental Sustainability")
     ]
     
-    // State for tracking selected items
     @EnvironmentObject var vm:LandingFlowViewModel
     @State private var selectedInterests: [InterestItem] = []
     @Binding var path:NavigationPath
     var body: some View {
         ZStack {
             Color.darkBlue
-              .edgesIgnoringSafeArea(.all)
+                .edgesIgnoringSafeArea(.all)
             VStack {
                 Text("Your Interests")
                     .font(.title)
-                    
-                    .foregroundColor(.white) // Make the title visible on gradient
+                    .foregroundColor(.white)
                 
                 Text("Your 5 interests to enhance your conversations")
                     .font(.subheadline)
@@ -64,10 +62,7 @@ struct InterestsSelectionView: View {
                 }
                 
                 Spacer()
-                
-                // Continue button
                 Button(action: {
-                    // Action for continue button
                     print("Continue pressed with selected interests: \(selectedInterests)")
                     path.append("AIFriendSelectionView")
                 }) {
@@ -79,20 +74,17 @@ struct InterestsSelectionView: View {
                         .cornerRadius(32)
                         .padding(.horizontal)
                 }
-               
-                .disabled(selectedInterests.isEmpty) // Disable when no interest is selected
+                
+                .disabled(selectedInterests.isEmpty)
             }
         } .navigationBarBackButtonHidden()
             .toolbar {
-              ToolbarItem(placement: .topBarLeading) {
-                CustomBackButton()
-              }
+                ToolbarItem(placement: .topBarLeading) {
+                    CustomBackButton()
+                }
             }.onChange(of: selectedInterests) { oldValue, newValue in
-               // vm.userChoices.interests = newValue
-              }
+            }
     }
-    
-    // Selection logic with maximum of 5 interests
     private func selectInterest(_ interest: InterestItem) {
         if selectedInterests.contains(interest) {
             selectedInterests.removeAll { $0 == interest }
@@ -102,7 +94,6 @@ struct InterestsSelectionView: View {
     }
 }
 
-// InterestButton view for each individual interest
 struct InterestButton: View {
     let icon: String
     let interest: String
@@ -111,7 +102,6 @@ struct InterestButton: View {
     var body: some View {
         Button(action: action) {
             HStack {
-                // Icon before the text
                 Text(icon)
                     .font(.title2)
                 
@@ -127,10 +117,10 @@ struct InterestButton: View {
             .cornerRadius(18)
             .font(.system(size: 18))
             .background(RoundedRectangle(cornerRadius: 8)
-              .stroke(Color.white.opacity(isSelected ? 1 : 0.2)))
+                .stroke(Color.white.opacity(isSelected ? 1 : 0.2)))
             .overlay {
-              RoundedRectangle(cornerRadius: 8)
-                .fill(Color.white.opacity(isSelected ? 0.3 :0.1))
+                RoundedRectangle(cornerRadius: 8)
+                    .fill(Color.white.opacity(isSelected ? 0.3 :0.1))
             }
         }
     }

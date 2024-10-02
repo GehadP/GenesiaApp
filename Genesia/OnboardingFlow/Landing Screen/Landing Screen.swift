@@ -12,7 +12,7 @@ struct RoutingScreen: View {
     let imageNames = ["person1",
                       "person2",
                       "person3"
-                    ]
+    ]
     @State private var currentIndex = 0
     @State private var showPrivacyPolicy = false
     @State private var showTermsOfService = false
@@ -29,19 +29,14 @@ struct RoutingScreen: View {
                 termsAndPolicyView
             }
             .navigationDestination(for: String.self, destination: { screen in
-              destinationView(screen: screen)
+                destinationView(screen: screen)
             })
             .navigationDestination(for: UserNamePushedFrom.self, destination: { pushedFrom in
-              userNameView(pushedFrom: pushedFrom)
+                userNameView(pushedFrom: pushedFrom)
             })
-//                  .navigationDestination(for: AIModel.self, destination: { model in
-//                    let vm = ChatViewViewModel(aiModel: model)
-//                    ChatViewScreen(vm: vm,
-//                                   path: $path, showSetRelationShipView: false)
-//                  })
             .navigationBarBackButtonHidden()
             .background {
-              backgroundView
+                backgroundView
             }
         }
     }
@@ -100,7 +95,7 @@ struct RoutingScreen: View {
         }
         else if screen == "ChatListScreen" {
             ChatListScreen(vm: ChatListViewModel(),
-                         path: $path)
+                           path: $path)
             .environmentObject(vm)
         }
         else if screen == "SettingsView" {
@@ -109,100 +104,100 @@ struct RoutingScreen: View {
         }
         
     }
-
+    
     private func userNameView(pushedFrom:UserNamePushedFrom) -> some View {
-      switch pushedFrom {
+        switch pushedFrom {
         case .landing:
-          EnterNameScreen(isFromStartNewChat: .constant(false),
-                       path: $path)
-          .environmentObject(vm)
+            EnterNameScreen(isFromStartNewChat: .constant(false),
+                            path: $path)
+            .environmentObject(vm)
         case .startNewChat:
-          EnterNameScreen(isFromStartNewChat: .constant(true),
-                       path: $path)
-          .environmentObject(vm)
-      }
+            EnterNameScreen(isFromStartNewChat: .constant(true),
+                            path: $path)
+            .environmentObject(vm)
+        }
     }
 }
-    #Preview {
-        RoutingScreen(path:.constant(NavigationPath()))
-            .environmentObject(LandingFlowViewModel())
+#Preview {
+    RoutingScreen(path:.constant(NavigationPath()))
+        .environmentObject(LandingFlowViewModel())
+}
+
+extension RoutingScreen {
+    private var titleHeader:some View {
+        Text("Genesia AI")
+            .font(.system(size: 40))
+            .bold()
+            .padding()
+            .foregroundStyle(.white)
+    }
+    private var letsStartButton:some View {
+        CustomContinueButton(title: "Let's Start",
+                             titleColor: .darkBlue,
+                             isDisabled: .constant(false))
+        .scaleEffect(scale)
+        .onAppear {
+        }
+        .onTapGesture {
+            path.append(UserNamePushedFrom.landing)
+        }
+    }
+    private var infoView: some View {
+        Text("The AI friend who is always there for you")
+            .frame(minWidth: 0, idealWidth: 200, maxWidth: 300, minHeight: 0, idealHeight: 80, maxHeight: 80, alignment: .center)
+            .foregroundStyle(.white)
+            .font(.system(size: 25, weight: .semibold))
     }
     
-    extension RoutingScreen {
-        private var titleHeader:some View {
-            Text("Genesia AI")
-                .font(.system(size: 40))
-                .bold()
-                .padding()
-                .foregroundStyle(.white)
-        }
-        private var letsStartButton:some View {
-            CustomContinueButton(title: "Let's Start",
-                                 titleColor: .darkBlue,
-                                 isDisabled: .constant(false))
-          .scaleEffect(scale)
-          .onAppear {
-          }
-          .onTapGesture {
-              path.append(UserNamePushedFrom.landing)
-          }
-        }
-        private var infoView: some View {
-            Text("The AI friend who is always there for you")
-                .frame(minWidth: 0, idealWidth: 200, maxWidth: 300, minHeight: 0, idealHeight: 80, maxHeight: 80, alignment: .center)
-                .foregroundStyle(.white)
-                .font(.system(size: 25, weight: .semibold))
-        }
-        
-        private var termsAndPolicyView: some View {
-            VStack(spacing:0) {
-                Text("By signing up, you agree to our")
-                    .foregroundStyle(.gray)
-                    .font(.caption2)
-                    .frame(width: 200, alignment: .center)
-                    .padding(.top)
-                HStack(spacing: 5) {
-                    Button {
-                        showTermsOfService = true
-                    } label: {
-                        Text("Terms of Service")
-                            .foregroundStyle(.gray)
-                            .font(.caption)
-                            .underline()
-                    }
-                    Text("and")
+    private var termsAndPolicyView: some View {
+        VStack(spacing:0) {
+            Text("By signing up, you agree to our")
+                .foregroundStyle(.gray)
+                .font(.caption2)
+                .frame(width: 200, alignment: .center)
+                .padding(.top)
+            HStack(spacing: 5) {
+                Button {
+                    showTermsOfService = true
+                } label: {
+                    Text("Terms of Service")
                         .foregroundStyle(.gray)
                         .font(.caption)
-                    
-                    Button {
-                        showPrivacyPolicy = true
-                    } label: {
-                        Text("Privacy Policy")
-                            .foregroundStyle(.gray)
-                            .font(.caption)
-                            .underline()
-                    }
+                        .underline()
+                }
+                Text("and")
+                    .foregroundStyle(.gray)
+                    .font(.caption)
+                
+                Button {
+                    showPrivacyPolicy = true
+                } label: {
+                    Text("Privacy Policy")
+                        .foregroundStyle(.gray)
+                        .font(.caption)
+                        .underline()
                 }
             }
-            
         }
         
-        private var backgroundView: some View {
-            ZStack(alignment:.center) {
-                Image(imageNames[currentIndex])
-                    .resizable()
-                    .scaledToFill()
-                    .transition(.opacity)
-                Rectangle()
-                    .fill(
-                        LinearGradient(
-                            gradient: Gradient(colors: [.darkBlue, .clear]),
-                            startPoint: .bottom,
-                            endPoint: .top
-                        )
-                    )
-                    .ignoresSafeArea()
-            }.ignoresSafeArea()
-        }
     }
+    
+    private var backgroundView: some View {
+        ZStack(alignment:.center) {
+            Image(imageNames[currentIndex])
+                .resizable()
+                .scaledToFill()
+                .transition(.opacity)
+            Rectangle()
+                .fill(
+                    LinearGradient(
+                        gradient: Gradient(colors: [.darkBlue, .clear]),
+                        startPoint: .bottom,
+                        endPoint: .top
+                    )
+                )
+                .ignoresSafeArea()
+        }.ignoresSafeArea()
+    }
+}
 

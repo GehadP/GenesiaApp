@@ -55,8 +55,6 @@ struct AIFriendSelectionView: View {
                     .padding(.top, 20)
                 
                 Spacer()
-            
-                // Scrollable horizontal list of friends
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 30) {
                         ForEach(friends) { friend in
@@ -79,10 +77,7 @@ struct AIFriendSelectionView: View {
                     .padding(.leading, UIScreen.main.bounds.width / 2 - 50) // Add extra padding at the start
                 }
                 .content.offset(x: -20)
-                
-                // Continue Button
                 Button(action: {
-                    // Handle continue action
                     path.append("CharacterCreationView")
                 }) {
                     Text("Continue")
@@ -97,12 +92,12 @@ struct AIFriendSelectionView: View {
             }
         }.onChange(of: selectedFriend) { oldValue, newValue in
             vm.userChoices.selectedAvatar = newValue.image
-          }
+        }
         .navigationBarBackButtonHidden()
         .toolbar {
-          ToolbarItem(placement: .topBarLeading) {
-            CustomBackButton()
-          }
+            ToolbarItem(placement: .topBarLeading) {
+                CustomBackButton()
+            }
         }
     }
 }

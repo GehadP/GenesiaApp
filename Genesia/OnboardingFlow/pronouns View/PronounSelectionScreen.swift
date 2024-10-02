@@ -12,50 +12,50 @@ import SwiftUI
 struct PronounSelectionScreen: View {
     
     @EnvironmentObject private var vm:LandingFlowViewModel
-    @State private var selectedPronoun = "He / Him" // Default selection
+    @State private var selectedPronoun = "He / Him" 
     @State var navigateToNextScreen: Bool = false
     let pronouns = ["She / Her", "He / Him", "They / Them"]
     @Binding var path:NavigationPath
     var body: some View {
-       
-            ZStack {
-                Color.darkBlue
-                    .edgesIgnoringSafeArea(.all)
+        
+        ZStack {
+            Color.darkBlue
+                .edgesIgnoringSafeArea(.all)
+            VStack {
                 VStack {
-                    VStack {
-                        yourPronounsTitle
-                        whichPersonTitle
-                        
-                    }
-                    .padding(.horizontal,80)
-                    Spacer()
-                    pickerView
-                    Spacer()
-                    Button(action: {
-                        navigateToNextScreen = true
-                        path.append("BirthdaySelectionScreen")
-                    }) {
-                        Text("Continue")
-                            .font(.headline)
-                            .foregroundColor(.black)
-                            .padding()
-                            .frame(maxWidth: .infinity)
-                            .background(Color.white)
-                            .cornerRadius(32)
-                            .padding(.horizontal, 40)
-                    }
-                    .padding(.vertical, 50)
+                    yourPronounsTitle
+                    whichPersonTitle
                     
                 }
+                .padding(.horizontal,80)
+                Spacer()
+                pickerView
+                Spacer()
+                Button(action: {
+                    navigateToNextScreen = true
+                    path.append("BirthdaySelectionScreen")
+                }) {
+                    Text("Continue")
+                        .font(.headline)
+                        .foregroundColor(.black)
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                        .background(Color.white)
+                        .cornerRadius(32)
+                        .padding(.horizontal, 40)
+                }
+                .padding(.vertical, 50)
+                
             }
-            .navigationBarBackButtonHidden()
-            .toolbar {
-              ToolbarItem(placement: .topBarLeading) {
+        }
+        .navigationBarBackButtonHidden()
+        .toolbar {
+            ToolbarItem(placement: .topBarLeading) {
                 CustomBackButton()
-              }
             }
         }
     }
+}
 
 
 struct PronounSelectionScreen_Previews: PreviewProvider {
