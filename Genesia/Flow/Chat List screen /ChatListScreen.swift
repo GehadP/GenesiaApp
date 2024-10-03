@@ -7,11 +7,13 @@
 
 import SwiftUI
 
-struct ChatListScreen: View {
 
-    @EnvironmentObject var landingFlowVM:LandingFlowViewModel
-    @StateObject var vm:ChatListViewModel
-    @Binding var path:NavigationPath
+struct ChatListScreen: View {
+    @EnvironmentObject var landingFlowVM: LandingFlowViewModel
+    @StateObject var vm: ChatListViewModel
+    @Binding var path: NavigationPath
+    @State private var searchText = ""
+    
     var body: some View {
         ZStack {
             Color(Color.darkBlue)
@@ -45,18 +47,23 @@ struct ChatListScreen: View {
                 }
                 .padding()
                 
-                List {
-                    ForEach(InMemoryPersistance.getAIModels()) { preview in
-                        ChatPreviewRow(item: preview)
+                SearchBar(text: $searchText)
+                    .padding(.horizontal)
+                
+                if filteredAIModels().isEmpty {
+                    EmptyStateView()
+                } else {
+                    List {
+                        ForEach(filteredAIModels()) { preview in
+                            ChatPreviewRow(item: preview)
+                        }
+                        .listRowBackground(Color.clear)
                     }
-                    .listRowBackground(Color.clear)
+                    .listStyle(PlainListStyle())
+                    .background(Color.clear)
                 }
-                .listStyle(PlainListStyle())
-                .background(Color.clear)
                 
                 Button(action: {
-                    // Action for starting new chat
-                    
                     path.append(UserNamePushedFrom.startNewChat)
                 }) {
                     Text("Start New Chat")
@@ -72,18 +79,76 @@ struct ChatListScreen: View {
         }
         .navigationBarBackButtonHidden()
         .toolbar {
-          ToolbarItem(placement: .topBarLeading) {
-          }
+            ToolbarItem(placement: .topBarLeading) {
+            }
+        }
+    }
+    
+    private func filteredAIModels() -> [AIModel] {
+        if searchText.isEmpty {
+            return InMemoryPersistance.getAIModels()
+        } else {
+            return InMemoryPersistance.getAIModels().filter { $0.aiName.lowercased().contains(searchText.lowercased()) }
         }
     }
 }
 
-struct ChatPreviewItem: Identifiable {
-    let id = UUID()
-    let name: String
-    let message: String
-    let time: String
-    let image: String
+struct SearchBar: View {
+    @Binding var text: String
+    
+    var body: some View {
+        HStack {
+            Image(systemName: "magnifyingglass")
+                .foregroundColor(.gray)
+            
+            TextField("Search", text: $text)
+                .foregroundColor(.white)
+            
+            if !text.isEmpty {
+                Button(action: {
+                    text = ""
+                }) {
+                    Image(systemName: "xmark.circle.fill")
+                        .foregroundColor(.gray)
+                }
+            }
+        }
+        .padding(8)
+        .background(Color.white.opacity(0.2))
+        .cornerRadius(10)
+    }
+}
+
+struct EmptyStateView: View {
+    @State private var isAnimating = false
+    
+    var body: some View {
+        VStack {
+            Image(systemName: "magnifyingglass")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 100, height: 100)
+                .foregroundColor(.gray)
+                .scaleEffect(isAnimating ? 1.1 : 1.0)
+                .animation(Animation.easeInOut(duration: 1.0).repeatForever(autoreverses: true), value: isAnimating)
+            
+            Text("No Results Found")
+                .font(.title2)
+                .fontWeight(.bold)
+                .foregroundColor(.white)
+                .padding(.top)
+            
+            Text("Try adjusting your search or filters")
+                .font(.subheadline)
+                .foregroundColor(.gray)
+                .multilineTextAlignment(.center)
+                .padding(.horizontal)
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .onAppear {
+            isAnimating = true
+        }
+    }
 }
 
 struct ChatPreviewRow: View {
@@ -119,8 +184,7 @@ struct ChatPreviewRow: View {
 
 struct ChatListScreen_Previews: PreviewProvider {
     static var previews: some View {
-       
-        return ChatListScreen(vm: .init(),path: .constant(NavigationPath()))
-          .environmentObject(LandingFlowViewModel())
+        return ChatListScreen(vm: .init(), path: .constant(NavigationPath()))
+            .environmentObject(LandingFlowViewModel())
     }
 }
