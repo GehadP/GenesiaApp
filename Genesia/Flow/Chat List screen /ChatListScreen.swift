@@ -7,12 +7,12 @@
 
 import SwiftUI
 
-
 struct ChatListScreen: View {
     @EnvironmentObject var landingFlowVM: LandingFlowViewModel
     @StateObject var vm: ChatListViewModel
     @Binding var path: NavigationPath
     @State private var searchText = ""
+    @State private var selectedAIModel: AIModel?
     
     var body: some View {
         ZStack {
@@ -56,6 +56,12 @@ struct ChatListScreen: View {
                     List {
                         ForEach(filteredAIModels()) { preview in
                             ChatPreviewRow(item: preview)
+                                .onTapGesture {
+                                    selectedAIModel = preview
+                                    // Here you can add logic to navigate to the chat detail view
+                                    // For example:
+                                    path.append("ChatScreenView")
+                                }
                         }
                         .listRowBackground(Color.clear)
                     }
@@ -184,7 +190,7 @@ struct ChatPreviewRow: View {
 
 struct ChatListScreen_Previews: PreviewProvider {
     static var previews: some View {
-        return ChatListScreen(vm: .init(), path: .constant(NavigationPath()))
+        ChatListScreen(vm: .init(), path: .constant(NavigationPath()))
             .environmentObject(LandingFlowViewModel())
     }
 }
