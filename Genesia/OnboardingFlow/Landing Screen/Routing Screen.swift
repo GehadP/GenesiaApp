@@ -14,8 +14,6 @@ struct RoutingScreen: View {
                       "person3"
     ]
     @State private var currentIndex = 0
-    @State private var showPrivacyPolicy = false
-    @State private var showTermsOfService = false
     @State private var scale: CGFloat = 1.0
     @Binding var path:NavigationPath
     
@@ -158,7 +156,6 @@ extension RoutingScreen {
                 .padding(.top)
             HStack(spacing: 5) {
                 Button {
-                    showTermsOfService = true
                 } label: {
                     Text("Terms of Service")
                         .foregroundStyle(.gray)
@@ -170,7 +167,6 @@ extension RoutingScreen {
                     .font(.caption)
                 
                 Button {
-                    showPrivacyPolicy = true
                 } label: {
                     Text("Privacy Policy")
                         .foregroundStyle(.gray)
