@@ -9,6 +9,8 @@ import SwiftUI
 
 struct SettingsView: View {
     @State private var isBackgroundVideoOn = true
+    @State var showCustomPopUp:Bool = false
+    @EnvironmentObject var vm:LandingFlowViewModel
     @Environment(\.presentationMode) var presentationMode
     @Binding var path:NavigationPath
     var body: some View {
@@ -65,6 +67,7 @@ struct SettingsView: View {
                     
                     Button(action: {
                         print("Reset Data tapped")
+                        showCustomPopUp = true
                     }) {
                         Text("Reset Data")
                             .foregroundColor(.red)
@@ -75,6 +78,21 @@ struct SettingsView: View {
                     }
                 }
                 .padding()
+            }
+            if showCustomPopUp {
+              BlurBackground(style: .dark)
+                .transition(.opacity)
+                .zIndex(1)
+                .onTapGesture {
+                  withAnimation {
+                    showCustomPopUp = false
+                  }
+                }
+              popupView
+                .transition(.opacity)
+                .frame(width: 300, height: 400)
+                .zIndex(2)
+              
             }
         }
         .navigationBarHidden(true)
@@ -141,4 +159,57 @@ struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
         SettingsView(path: .constant(NavigationPath()))
     }
+}
+extension SettingsView {
+    private var popupView:some View {
+        SettingPopupView(title: "Are you sure?",
+                      message: "All of your data and AI Characters will be erased permanently.",
+                      firstButton:RoundedButton(title: "Reset Data", titleColor: .red, isDisabled: .constant(false)).onTapGesture {
+       vm.clear()
+        path.removeLast(path.count)
+      }, secondButton:Button(action: {
+        withAnimation {
+          showCustomPopUp = false
+        }
+      }, label: {
+        Text("Cancel")
+          .foregroundStyle(.white)
+      }).padding()
+      ).transition(.opacity)
+        .frame(width: 300, height: 400)
+    }
+}
+
+struct RoundedButton: View {
+  let title:String
+  let titleColor:Color
+  @Binding var isDisabled:Bool
+  
+    var body: some View {
+      Text(title)
+        .font(.headline)
+        .foregroundColor(titleColor)
+        .padding()
+        .frame(width: 250, height: 45, alignment: .center)
+        .background(isDisabled ? .gray.opacity(0.5) : .white)
+        .cornerRadius(20)
+    }
+}
+
+#Preview {
+    RoundedButton(title: "Let's Start", titleColor: .darkBlue,isDisabled: .constant(false))
+}
+
+
+struct BlurBackground: UIViewRepresentable {
+  let style: UIBlurEffect.Style
+  
+  func makeUIView(context: Context) -> UIVisualEffectView {
+    let effectView = UIVisualEffectView(effect: UIBlurEffect(style: style))
+    return effectView
+  }
+  
+  func updateUIView(_ uiView: UIVisualEffectView, context: Context) {
+    uiView.effect = UIBlurEffect(style: style)
+  }
 }

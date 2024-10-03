@@ -114,4 +114,8 @@ final class LandingFlowViewModel:ObservableObject {
     aiModel.selectedAvatar = userChoices.selectedAvatar
     InMemoryPersistance.saveModel(model: aiModel)
   }
+    func clear() {
+        self.userChoices = UserDataCollection()
+        InMemoryPersistance.clearData()
+    }
 }
