@@ -48,7 +48,7 @@ struct CharacterCreationView: View {
                             .padding(.bottom,30)
                     }
                     genderButtons
-                }.frame(width: 350, height: 130, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                }.frame(width: 350, height: 140, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                     .background(.ultraThinMaterial)
                     .clipShape(RoundedRectangle(cornerRadius: 10))
             }.padding(.bottom,10)
@@ -67,7 +67,7 @@ struct CharacterCreationView: View {
 
 #Preview {
     let vm = LandingFlowViewModel()
-    vm.userChoices.selectedAvatar = "6thChar"
+    vm.userChoices.selectedAvatar = "person1"
     return CharacterCreationView(path: .constant(NavigationPath()))
         .environmentObject(vm)
 }
