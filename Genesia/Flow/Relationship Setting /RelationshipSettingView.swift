@@ -109,6 +109,6 @@ struct RoundedCorner: Shape {
 
 struct RelationshipSettingView_Previews: PreviewProvider {
     static var previews: some View {
-        RelationshipSettingView(path: .constant(NavigationPath()))
+        RelationshipSettingView(path: .constant(NavigationPath())).environmentObject(LandingFlowViewModel())
     }
 }
