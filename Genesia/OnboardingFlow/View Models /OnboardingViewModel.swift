@@ -31,7 +31,7 @@ final class UserDataCollection:ObservableObject {
   var userPronouns:String = "He/Him"
   var dateOfBirth:Date = .now
   var interests:[String] = []
-  var selectedAvatar:String?
+  var selectedAvatar:String = "person1"
   var aiName:String = ""
   var aiGender:String = "Female"
   var aiAge:Int = 18
