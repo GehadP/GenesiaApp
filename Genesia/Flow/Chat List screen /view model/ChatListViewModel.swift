@@ -13,13 +13,4 @@ final class ChatListViewModel:ObservableObject {
     aiModels = InMemoryPersistance.getAIModels()
   }
   
-  func deleteAIModel(modelID:UUID) {
-    InMemoryPersistance.deleteAIModel(modelID: modelID)
-    aiModels = InMemoryPersistance.getAIModels()
-  }
-  
-  func pinModel(modelID:UUID,pinned:Bool) {
-    InMemoryPersistance.pinModel(modelID: modelID, pinned: pinned)
-    aiModels = InMemoryPersistance.getAIModels()
-  }
 }

@@ -12,9 +12,6 @@ struct ChatScreenView: View {
     @Binding var path: NavigationPath
     var body: some View {
         VStack {
-            
-            
-            
             Spacer()
             
             // Message input area

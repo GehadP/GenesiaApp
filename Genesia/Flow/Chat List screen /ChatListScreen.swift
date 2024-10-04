@@ -60,6 +60,10 @@ struct ChatListScreen: View {
                                     selectedAIModel = preview
                                     // Here you can add logic to navigate to the chat detail view
                                     // For example:
+                                    landingFlowVM.userChoices.aiName = selectedAIModel?.aiName ?? ""
+                                    landingFlowVM.userChoices.selectedAvatar = selectedAIModel?.selectedAvatar ?? "person1"
+                                    
+                                    
                                     path.append("ChatScreenView")
                                 }
                         }
