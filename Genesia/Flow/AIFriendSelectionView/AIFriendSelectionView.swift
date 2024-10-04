@@ -78,6 +78,7 @@ struct AIFriendSelectionView: View {
                 }
                 .content.offset(x: -20)
                 Button(action: {
+                    
                     path.append("CharacterCreationView")
                 }) {
                     Text("Continue")

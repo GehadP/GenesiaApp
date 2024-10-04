@@ -40,7 +40,7 @@ struct ProView: View {
                       //  dismiss()
                       //  DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                             path.append("ChatListScreen")
-                            path.append("ChatScreenView")
+                        path.append(ChatScreenViewPushedFrom.personalitySelection)
                       
                     }) {
                         Image(systemName: "xmark")

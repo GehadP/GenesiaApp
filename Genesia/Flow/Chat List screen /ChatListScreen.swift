@@ -63,8 +63,7 @@ struct ChatListScreen: View {
                                     landingFlowVM.userChoices.aiName = selectedAIModel?.aiName ?? ""
                                     landingFlowVM.userChoices.selectedAvatar = selectedAIModel?.selectedAvatar ?? "person1"
                                     
-                                    
-                                    path.append("ChatScreenView")
+                                    path.append(ChatScreenViewPushedFrom.chatList)
                                 }
                         }
                         .listRowBackground(Color.clear)

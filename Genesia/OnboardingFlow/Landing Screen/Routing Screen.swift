@@ -32,6 +32,9 @@ struct RoutingScreen: View {
             .navigationDestination(for: UserNamePushedFrom.self, destination: { pushedFrom in
                 userNameView(pushedFrom: pushedFrom)
             })
+            .navigationDestination(for: ChatScreenViewPushedFrom.self, destination: { pushedFrom in
+                chatScreeniew(pushedFrom: pushedFrom)
+            })
             .navigationBarBackButtonHidden()
             .background {
                 backgroundView
@@ -87,10 +90,6 @@ struct RoutingScreen: View {
             RelationshipSettingView(path:$path)
                 .environmentObject(vm)
         }
-        else if screen == "ChatScreenView" {
-            ChatScreenView(path:$path)
-                .environmentObject(vm)
-        }
         else if screen == "ChatListScreen" {
             ChatListScreen(vm: ChatListViewModel(),
                            path: $path)
@@ -112,6 +111,16 @@ struct RoutingScreen: View {
         case .startNewChat:
             EnterNameScreen(isFromStartNewChat: .constant(true),
                             path: $path)
+            .environmentObject(vm)
+        }
+    }
+    private func chatScreeniew(pushedFrom:ChatScreenViewPushedFrom) -> some View {
+        switch pushedFrom {
+        case .chatList:
+            ChatScreenView(path: $path, showSetRelationShipView: false)
+            .environmentObject(vm)
+        case .personalitySelection:
+            ChatScreenView(path: $path, showSetRelationShipView: true)
             .environmentObject(vm)
         }
     }

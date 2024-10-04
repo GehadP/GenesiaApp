@@ -7,11 +7,16 @@
 
 import SwiftUI
 
+enum ChatScreenViewPushedFrom:Hashable {
+  case chatList
+  case personalitySelection
+}
 struct ChatScreenView: View {
     @EnvironmentObject var vm:LandingFlowViewModel
     @Binding var path: NavigationPath
-    @State var showSetRelationShipView:Bool = true
+    @State var showSetRelationShipView:Bool
     @State var showProScreen:Bool = false
+    
     var body: some View {
         ZStack {
             VStack {
@@ -186,7 +191,7 @@ extension ChatScreenView {
 }
 struct ChatScreenView_Previews: PreviewProvider {
     static var previews: some View {
-        ChatScreenView(path: .constant(NavigationPath()))
+        ChatScreenView(path: .constant(NavigationPath()), showSetRelationShipView: false)
             .environmentObject(LandingFlowViewModel())
     }
 }
